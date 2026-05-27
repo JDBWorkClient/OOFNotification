@@ -1,0 +1,12 @@
+{
+  "name": "windows-calculator",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "test:e2e": "npx playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0"
+  }
+}

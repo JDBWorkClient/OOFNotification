@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Windows Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="calculator-shell" role="application" aria-label="Windows style calculator">
+    <section class="calculator-header">
+      <div>
+        <span class="app-icon">🧮</span>
+        <div>
+          <p class="app-name">Calculator</p>
+          <p class="app-mode">Standard</p>
+        </div>
+      </div>
+      <span class="status-text">CALC</span>
+    </section>
+
+    <div class="calculator-screen" aria-live="polite">
+      <div class="calc-history" id="history"></div>
+      <div class="calc-display" id="display">0</div>
+    </div>
+
+    <div class="calculator-buttons" role="group" aria-label="Calculator buttons">
+      <button type="button" class="btn function" data-action="clear">C</button>
+      <button type="button" class="btn function" data-action="toggle-sign">±</button>
+      <button type="button" class="btn function" data-action="percent">%</button>
+      <button type="button" class="btn operator" data-action="operator" data-value="/">÷</button>
+
+      <button type="button" class="btn" data-action="digit" data-value="7">7</button>
+      <button type="button" class="btn" data-action="digit" data-value="8">8</button>
+      <button type="button" class="btn" data-action="digit" data-value="9">9</button>
+      <button type="button" class="btn operator" data-action="operator" data-value="*">×</button>
+
+      <button type="button" class="btn" data-action="digit" data-value="4">4</button>
+      <button type="button" class="btn" data-action="digit" data-value="5">5</button>
+      <button type="button" class="btn" data-action="digit" data-value="6">6</button>
+      <button type="button" class="btn operator" data-action="operator" data-value="-">−</button>
+
+      <button type="button" class="btn" data-action="digit" data-value="1">1</button>
+      <button type="button" class="btn" data-action="digit" data-value="2">2</button>
+      <button type="button" class="btn" data-action="digit" data-value="3">3</button>
+      <button type="button" class="btn operator" data-action="operator" data-value="+">+</button>
+
+      <button type="button" class="btn wide" data-action="digit" data-value="0">0</button>
+      <button type="button" class="btn" data-action="decimal">.</button>
+      <button type="button" class="btn equals" data-action="equals">=</button>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
