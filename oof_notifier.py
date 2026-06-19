@@ -29,6 +29,7 @@ class Config:
     SHAREPOINT_FOLDER = "Shift Rosters"
     ROSTER_FILE = os.getenv("ROSTER_FILE", "Roster-2026.xlsx")
     
+    # Power Automate webhook URL for Teams notifications
     TEAMS_WEBHOOK = os.getenv("TEAMS_WEBHOOK_URL", "")
     
     STATE_FILE = Path("oof-state.json")
@@ -340,9 +341,9 @@ class Notification:
         webhook_url: Optional[str] = None,
         dry_run: bool = False
     ) -> bool:
-        """Send notification to Teams via webhook"""
+        """Send notification to Teams via Power Automate webhook"""
         
-        if not webhook_url or webhook_url.startswith("https://outlook.webhook"):
+        if not webhook_url:
             logger.warning("Teams webhook not configured - skipping Teams notification")
             return False
         
@@ -350,19 +351,30 @@ class Notification:
         
         logger.info(f"Preparing Teams notification for {engineer_name} ({status_text})")
         
-        # Create message
-        message = Notification.create_teams_message(
-            engineer_name, track, status, email
-        )
+        # Create message for Power Automate flow
+        # Simple format: just a text message that the flow will post to Teams
+        message_text = f"""🚨 **Engineer OOF Alert** 🚨
+
+**Engineer:** {engineer_name}
+**Track:** {track}
+**Status:** {status_text}
+**Email:** {email}
+**Notified:** {datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")}
+
+*Contact team lead if urgent assistance is needed.*"""
+        
+        payload = {
+            "message": message_text
+        }
         
         if dry_run:
-            logger.info(f"[DRY RUN] Would send Teams notification: {json.dumps(message, indent=2)}")
+            logger.info(f"[DRY RUN] Would send Teams notification:\n{message_text}")
             return True
         
         try:
             response = requests.post(
                 webhook_url,
-                json=message,
+                json=payload,
                 timeout=10
             )
             response.raise_for_status()
