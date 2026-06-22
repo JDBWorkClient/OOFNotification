@@ -1,5 +1,7 @@
 name: Engineer OOF Notification Check
 
+# Workflow for checking engineer OOF status from SharePoint roster
+
 on:
   schedule:
     # Run daily at 12:00 PM UTC (7:00 AM PST / 10:00 AM EST)
